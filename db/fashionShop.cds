@@ -4,9 +4,11 @@ using {Currency} from '@sap/cds/common';
 
 //Entity
 entity Sections {
-    key id          : UUID;
-        name        : String(16);
-        description : String(64);
+    key id            : UUID;
+        name          : String(16);
+        description   : String(64);
+        Fashion_Types : Association to many Fashion_Types
+                            on Fashion_Types.section = $self;
 }
 
 entity Fashion_Types {
@@ -31,6 +33,13 @@ entity Fashion_Items {
 //CDS Views
 //paakyat yung select/navigation niya
 view YC_FashionShop as
+// select from Sections as aSection
+// left outer join Fashion_Types as bFashionType on bFashionType.id = aSection.id
+// left outer join Fashion_Items as bFashionItem on bFashionItem.fashionType = bFashionType.id
+// {
+//     aSection.id as sectionID
+// }
+// where bFashionItem.isAvailable = 'X';
     select from Fashion_Items as fItem {
             fItem.fashionType.section.id          as sectionID,
             fItem.fashionType.section.name        as sectionName,
