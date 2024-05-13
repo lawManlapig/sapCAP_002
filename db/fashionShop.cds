@@ -4,7 +4,7 @@ using {Currency} from '@sap/cds/common';
 
 //Entity
 entity Sections {
-    key id          : UUID;
+    key id          : UUID @(title: 'Section ID');
         name        : String(16);
         description : String(64);
 // Fashion_Types : Association to many Fashion_Types
@@ -13,15 +13,15 @@ entity Sections {
 
 entity Fashion_Types {
     key id          : UUID;
-    key section     : Association to Sections;
-        typename    : String(16);
+    key section     : Association to Sections @(title: 'Section ID');
+        typename    : String(16) @(title: 'Fashion Type');
         description : String(64);
 }
 
 entity Fashion_Items {
     key id          : UUID;
-    key fashionType : Association to Fashion_Types;
-        itemname    : String(16);
+    key fashionType : Association to Fashion_Types @(title: 'Fashion Type');
+        itemname    : String(16) @(title: 'Item Name');
         brand       : String(16);
         size        : String(8);
         material    : String(16);

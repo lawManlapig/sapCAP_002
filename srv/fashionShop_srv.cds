@@ -18,9 +18,25 @@ annotate fashionShop.Fashion_Items with @(UI: {
         Description   : {Value: 'Online Fashion Shop Description'}
     },
 
+    //Selection Fields
+    SelectionFields        : [
+        //yung field ng CDS View mo
+        fashionType_id,
+        brand,
+        itemname,
+        size,
+        price
+    ],
+
     LineItem               : [
-        {Value: fashionType.section.name},
-        {Value: fashionType.typename},
+        {
+            Value: fashionType.section.name,
+            Label: 'Section Name'
+        },
+        {
+            Value: fashionType.typename,
+            Label: 'Fashion Type',
+        },
         {Value: itemname},
         {Value: brand},
         {Value: size},
@@ -28,14 +44,18 @@ annotate fashionShop.Fashion_Items with @(UI: {
         {Value: currency_code}
     ],
 
+    //Facets  -- parang Grouping ito...
     Facets                 : [{
         $Type : 'UI.CollectionFacet',
+        ID: '1', //Grouping number.. incase you need to add more in the future
         Label : 'Fashion Details',
         Facets: [{
             $Type : 'UI.ReferenceFacet',
             Target: '@UI.FieldGroup#ItemDetails',
         }],
-    }],
+    }
+    //Additional FAcet here... just remember to change the Target
+    ],
 
     FieldGroup #ItemDetails: {Data: [
         {Value: fashionType_id},
